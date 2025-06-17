@@ -4,50 +4,59 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="register-container">
-    <div class="register-header">
-         <img src="/images/logo.png" alt="Logo" style="height: 50px; margin-bottom: 1rem;">
+@section Styles {
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+}
+
+<div class="auth-card">
+    <div class="brand-logo">STUDENT MANAGEMENT</div>
+    <div class="auth-header">
         <h1>SIGN UP</h1>
+        <p>Fill in the form to get started</p>
     </div>
 
-    <form asp-action="Register">
-        <div asp-validation-summary="ModelOnly" class="validation-message"></div>
+    <form asp-action="Register" class="auth-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label asp-for="FirstName">First Name</label>
-                <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
-                <span asp-validation-for="FirstName" class="validation-message"></span>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="FirstName">First Name</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName">Last Name</label>
-                <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
-                <span asp-validation-for="LastName" class="validation-message"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="LastName">Last Name</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
             </div>
         </div>
 
         <div class="form-group">
             <label asp-for="Email">Email</label>
-            <input asp-for="Email" class="form-control" placeholder="Enter email" />
-            <span asp-validation-for="Email" class="validation-message"></span>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Username">Username</label>
-            <input asp-for="Username" class="form-control" placeholder="Enter username" />
-            <span asp-validation-for="Username" class="validation-message"></span>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="Password">Password</label>
-            <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" />
-            <span asp-validation-for="Password" class="validation-message"></span>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="ConfirmPassword">Confirm Password</label>
-            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm password" />
-            <span asp-validation-for="ConfirmPassword" class="validation-message"></span>
+            <input asp-for="ConfirmPassword" type="password" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
 
         <div class="form-group">
@@ -57,21 +66,13 @@
                 <option value="Admin">Admin</option>
                 <option value="Student">Student</option>
             </select>
-            <span asp-validation-for="Role" class="validation-message"></span>
+            <span asp-validation-for="Role" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn-register">Register</button>
+        <button type="submit" class="btn btn-primary">Register</button>
+
+        <div class="auth-link">
+            Already have an account? <a asp-action="Login">Sign In</a>
+        </div>
     </form>
-
-    <div class="login-link">
-        Already have an account? <a asp-action="Login">Login</a>
-    </div>
-
-    <div class="brand-footer">
-        STUDENT MANAGEMENT APP
-    </div>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

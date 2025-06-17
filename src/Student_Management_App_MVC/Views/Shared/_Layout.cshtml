@@ -3,26 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Student_Management_App_MVC</title>
+    <title>@ViewData["Title"] - Student Management App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Student_Management_App_MVC.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
-<body>
-    <header>
-        
-    </header>
+<body class="auth-layout">
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="auth-footer">
         <div class="container">
-            &copy; 2025 - Student_Management_App_MVC - <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+            &copy; 2025 - Student Management App
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

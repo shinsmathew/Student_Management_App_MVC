@@ -1,4 +1,5 @@
 ﻿using Student_Management_App_MVC.Models.DTOs.User;
+using Student_Management_App_MVC.Models.Entities;
 
 namespace Student_Management_App_MVC.Services.Interfaces
 {
@@ -6,6 +7,7 @@ namespace Student_Management_App_MVC.Services.Interfaces
     {
         Task<bool> RegisterUserAsync(UserRegisterDto userDto);
         Task<bool> LoginUserAsync(UserLoginDto userDto);
+        Task<User> GetUserByUsernameAsync(string username);
         Task LogoutUserAsync();
     }
 }

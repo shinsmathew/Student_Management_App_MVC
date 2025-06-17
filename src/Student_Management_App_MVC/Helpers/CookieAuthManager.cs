@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace Student_Management_App_MVC.Helpers
 {
-    public class CookieAuthManager
+    public static class CookieAuthManager
     {
         public static async Task SignInAsync(HttpContext httpContext, int userId, string username, string role, bool isPersistent = true)
         {
@@ -15,10 +15,15 @@ namespace Student_Management_App_MVC.Helpers
                 new Claim(ClaimTypes.Role, role)
             };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var claimsIdentity = new ClaimsIdentity(
+                claims,
+                CookieAuthenticationDefaults.AuthenticationScheme);
+
             var authProperties = new AuthenticationProperties
             {
-                IsPersistent = isPersistent
+                IsPersistent = isPersistent,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30), // 30 minute expiration
+                AllowRefresh = true // Allow refreshing the session
             };
 
             await httpContext.SignInAsync(
@@ -33,3 +38,4 @@ namespace Student_Management_App_MVC.Helpers
         }
     }
 }
+

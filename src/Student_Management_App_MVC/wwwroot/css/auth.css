@@ -208,6 +208,37 @@ body.auth-layout {
     .dark-overlay .auth-form .form-control::placeholder {
         color: rgba(255, 255, 255, 0.6);
     }
+/* Dropdown/Select Styles */
+.auth-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234261ee'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+    padding-right: 2.5rem;
+}
+
+/* Dark mode dropdown styles */
+.dark-overlay .auth-form select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+    .dark-overlay .auth-form select option {
+        background-color: #333;
+        color: white;
+    }
+
+/* Focus state for select */
+.auth-form select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.25);
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {

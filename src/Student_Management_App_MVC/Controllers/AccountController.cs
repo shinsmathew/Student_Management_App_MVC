@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Student_Management_App_MVC.Enums;
 using Student_Management_App_MVC.Models.DTOs.User;
 using Student_Management_App_MVC.Services.Interfaces;
 using Student_Management_App_MVC.Validators;
@@ -44,7 +45,12 @@ namespace Student_Management_App_MVC.Controllers
                 return View(userLoginDto);
             }
 
-            return RedirectToAction("Index", "Home");
+            // Get the user to check their role
+            var user = await _userService.GetUserByUsernameAsync(userLoginDto.Username);
+
+            // Redirect based on role
+            return RedirectToAction(user.Role == UserRole.Admin ? "AdminView" : "StudentView",
+                                 user.Role == UserRole.Admin ? "Admin" : "Student");
 
         }
 
@@ -76,7 +82,21 @@ namespace Student_Management_App_MVC.Controllers
                 return View(userRegisterDto);
             }
 
-            return RedirectToAction("Login");
+            // Auto-login after registration
+            var loginDto = new UserLoginDto
+            {
+                Username = userRegisterDto.Username,
+                Password = userRegisterDto.Password
+            };
+
+            await _userService.LoginUserAsync(loginDto);
+
+            // Get the user to check their role
+            var user = await _userService.GetUserByUsernameAsync(userRegisterDto.Username);
+
+            // Redirect based on role
+            return RedirectToAction(user.Role == UserRole.Admin ? "AdminView" : "StudentView",
+                                 user.Role == UserRole.Admin ? "Admin" : "Student");
         }
 
         [HttpPost]

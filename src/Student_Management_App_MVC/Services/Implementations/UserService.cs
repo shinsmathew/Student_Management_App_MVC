@@ -12,68 +12,57 @@ using AutoMapper;
 
 namespace Student_Management_App_MVC.Services.Implementations
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+        public UserService(
+            IUserRepository userRepository,
+            IHttpContextAccessor httpContextAccessor,
+            IMapper mapper)
         {
             _userRepository = userRepository;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
 
-        public async Task<bool> RegisterUserAsync(UserRegisterDto userRegisterDto)
+        public async Task<bool> LoginUserAsync(UserLoginDto userDto)
         {
-            var userExist = await _userRepository.GetUserExistAsync(userRegisterDto.Username, userRegisterDto.Email);
-            
-            if(userExist)
-            {
-                return false; // User already exists
-            }
-            var user = _mapper.Map<User>(userRegisterDto);
-            user.Password = PasswordHasher.HashPassword(userRegisterDto.Password);
-            user.Role = Enum.Parse<UserRole>(userRegisterDto.Role);
-            await _userRepository.AddUserAsync(user);
-            return true; // User registered successfully
-        }
+            var user = await _userRepository.GetUserByUserNameAsync(userDto.Username);
+            if (user == null || !PasswordHasher.VerifyPassword(userDto.Password, user.Password))
+                return false;
 
-        public async Task<bool> LoginUserAsync(UserLoginDto userLoginDto)
-        {
-           var user = await _userRepository.GetUserByUserNameAsync(userLoginDto.Username);
-            if (user == null)
-            {
-                return false; // User not found
-            }
-            var claims = new List<Claim>()
-            {
-                 new Claim(ClaimTypes.NameIdentifier, user.UserID.ToString()),
-                 new Claim(ClaimTypes.Name, user.Username),
-                 new Claim(ClaimTypes.Role, user.Role.ToString())
-
-            };
-
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var authProperties = new AuthenticationProperties
-            {
-                IsPersistent = true
-            };
-
-            await _httpContextAccessor.HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
+            await CookieAuthManager.SignInAsync(
+                _httpContextAccessor.HttpContext,
+                user.UserID,
+                user.Username,
+                user.Role.ToString());
 
             return true;
         }
 
+        public async Task<bool> RegisterUserAsync(UserRegisterDto userDto)
+        {
+            if (await _userRepository.GetUserExistAsync(userDto.Username, userDto.Email))
+                return false;
+
+            var user = _mapper.Map<User>(userDto);
+            user.Password = PasswordHasher.HashPassword(userDto.Password);
+            user.Role = Enum.Parse<UserRole>(userDto.Role);
+
+            await _userRepository.AddUserAsync(user);
+            return true;
+        }
+        public async Task<User> GetUserByUsernameAsync(string username)
+        {
+            return await _userRepository.GetUserByUserNameAsync(username);
+        }
+
         public async Task LogoutUserAsync()
         {
-            await _httpContextAccessor.HttpContext.SignOutAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme);
+            await CookieAuthManager.SignOutAsync(_httpContextAccessor.HttpContext);
         }
     }
-    
 }

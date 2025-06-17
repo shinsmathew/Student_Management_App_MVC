@@ -1,5 +1,4 @@
-﻿/* Base Styles */
-:root {
+﻿:root {
     --primary-color: #4361ee;
     --secondary-color: #3f37c9;
     --accent-color: #4895ef;
@@ -9,19 +8,40 @@
     --success-color: #4cc9f0;
 }
 
+/* Base Layout Styles */
 body.auth-layout {
-    background-color: #f5f7fb;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #f5f7fb;
+    background-image: url('/images/login-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
 }
 
+.auth-layout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 0;
+}
+
+/* Container & Footer */
 .container {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
 .auth-footer {
@@ -29,9 +49,11 @@ body.auth-layout {
     padding: 1rem 0;
     color: #6c757d;
     background-color: transparent;
+    position: relative;
+    z-index: 1;
 }
 
-/* Card Styles */
+/* Auth Card Styles */
 .auth-card {
     background: white;
     border-radius: 10px;
@@ -42,6 +64,7 @@ body.auth-layout {
     margin: 2rem auto;
 }
 
+/* Header Styles */
 .auth-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -55,6 +78,27 @@ body.auth-layout {
 
     .auth-header p {
         color: #6c757d;
+    }
+
+/* Brand Logo Styles */
+.brand-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .brand-logo img {
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .brand-logo .title {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin: 0;
     }
 
 /* Form Styles */
@@ -125,19 +169,58 @@ body.auth-layout {
             text-decoration: underline;
         }
 
-/* Branding */
-.brand-logo {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--primary-color);
+/* Dark Overlay Variant */
+.auth-layout.dark-overlay::before {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-/* Responsive */
-@media (max-width: 576px) {
+.dark-overlay .auth-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: white;
+}
+
+.dark-overlay .auth-header h1,
+.dark-overlay .brand-logo .title {
+    color: white;
+}
+
+.dark-overlay .auth-header p,
+.dark-overlay .auth-link {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+    .dark-overlay .auth-link a {
+        color: var(--accent-color);
+    }
+
+.dark-overlay .auth-form label,
+.dark-overlay .auth-form .form-control {
+    color: white;
+}
+
+.dark-overlay .auth-form .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+    .dark-overlay .auth-form .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .auth-layout {
+        background-attachment: scroll;
+    }
+
     .auth-card {
         padding: 1.5rem;
         margin: 1rem;
+    }
+
+    .brand-logo img {
+        height: 50px;
     }
 }

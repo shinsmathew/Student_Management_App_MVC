@@ -48,8 +48,9 @@ namespace Student_Management_App_MVC.Validators
 
 
             RuleFor(x => x.DateOfBirth)
-                .NotEmpty().WithMessage("Date of birth is required.")
-                .LessThan(DateTime.Now).WithMessage("Date of birth must be in the past.");
+                 .NotEmpty().WithMessage("Date of birth is required")
+                 .LessThan(DateTime.Today).WithMessage("Date of birth must be in the past")
+                 .Must(BeAValidAge).WithMessage("Student must be between 5 and 25 years old");
 
             RuleFor(x => x.SchoolName)
                 .NotEmpty().WithMessage("SchoolName required.")
@@ -58,6 +59,15 @@ namespace Student_Management_App_MVC.Validators
             RuleFor(x => x.Course)
                     .NotEmpty().WithMessage("Course required.")
                     .MaximumLength(50).WithMessage("Course must not exceed 50 characters.");
+        }
+
+        private bool BeAValidAge(DateTime dateOfBirth)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - dateOfBirth.Year;
+            if (dateOfBirth.Date > today.AddYears(-age)) age--;
+
+            return age >= 5 && age <= 25;
         }
     }
 }

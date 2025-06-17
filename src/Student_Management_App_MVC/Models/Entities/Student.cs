@@ -35,6 +35,8 @@ namespace Student_Management_App_MVC.Models.Entities
         [Phone]
         public string StudentPhone2 { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
         [Required]
         [MaxLength(50)]

@@ -1,4 +1,6 @@
-﻿namespace Student_Management_App_MVC.Models.DTOs.Student
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Student_Management_App_MVC.Models.DTOs.Student
 {
     public class StudentReadDto
     {
@@ -12,6 +14,7 @@
         public string StudentEmail { get; set; }
         public string PhoneNumber1 { get; set; }
         public string? PhoneNumber2 { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         public string SchoolName { get; set; }
         public string Course { get; set; }

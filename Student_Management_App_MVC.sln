@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FF7D5DA6-67F7-4073-8DE7-8931AE56F390}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Student_Management_App_MVC", "src\Student_Management_App_MVC\Student_Management_App_MVC.csproj", "{13353B57-F637-46EF-A7CC-A6B6DFF29542}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13353B57-F637-46EF-A7CC-A6B6DFF29542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13353B57-F637-46EF-A7CC-A6B6DFF29542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13353B57-F637-46EF-A7CC-A6B6DFF29542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13353B57-F637-46EF-A7CC-A6B6DFF29542}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13353B57-F637-46EF-A7CC-A6B6DFF29542} = {FF7D5DA6-67F7-4073-8DE7-8931AE56F390}
+	EndGlobalSection
+EndGlobal

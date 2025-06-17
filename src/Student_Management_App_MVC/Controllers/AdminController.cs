@@ -77,6 +77,7 @@ namespace Student_Management_App_MVC.Controllers
         }
 
         [HttpPost]
+        
         public async Task<IActionResult> AdminEdit(StudentUpdateDto studentDto)
         {
             var validator = new StudentUpdateValidator();

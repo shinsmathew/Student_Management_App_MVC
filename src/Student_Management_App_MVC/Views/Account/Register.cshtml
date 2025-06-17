@@ -1,6 +1,7 @@
 ﻿@model Student_Management_App_MVC.Models.DTOs.User.UserRegisterDto
 
 @{
+    Layout = "_AuthLayout"; 
     ViewData["Title"] = "Register";
 }
 
@@ -15,7 +16,7 @@
     </div>
     <div class="auth-header">
         <h1>Create Account</h1>
-        <p>Please enter your credentials to login</p>
+        <p>Please enter your details to register</p>
     </div>
 
     <form asp-action="Register" class="auth-form">
@@ -50,7 +51,7 @@
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group password-field">
             <label asp-for="Password">Password</label>
             <input asp-for="Password" type="password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
@@ -64,7 +65,7 @@
 
         <div class="form-group">
             <label asp-for="Role">Role</label>
-            <select asp-for="Role" class="form-control">
+            <select asp-for="Role" class="form-control role-selector">
                 <option value="">Select Role</option>
                 <option value="Admin">Admin</option>
                 <option value="Student">Student</option>

@@ -30,10 +30,8 @@ namespace Student_Management_App_MVC.Models.Entities
         public string StudentEmail { get; set; }
         [Required]
         [Phone]
-        public string StudentPhone1 { get; set; }
-        [Required]
-        [Phone]
-        public string StudentPhone2 { get; set; }
+        public string StudentPhone1 { get; set; } = string.Empty;
+        public string StudentPhone2 { get; set; } = string.Empty;
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

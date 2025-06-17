@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+/* Base styles for non-auth pages */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+.container {
+    flex: 1;
+    padding: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    color: #6c757d;
+}

@@ -2,49 +2,101 @@
 
 @{
     ViewData["Title"] = "Admin Dashboard";
+    Layout = "_LayoutAdmin"; 
 }
 
-<div class="container">
-    <h1 class="text-center mb-4">Student Management</h1>
-
-    <div class="d-flex justify-content-between mb-3">
-        <h3>Students List</h3>
-        <a asp-action="AdminAdd" class="btn btn-success">Add New Student</a>
+<div class="admin-container">
+    <div class="admin-header">
+        <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+        <div class="admin-actions">
+            <a asp-action="AdminAdd" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New Student
+            </a>
+            <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                <button type="submit" class="btn btn-outline-secondary">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
+        </div>
     </div>
 
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>DOB</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>School</th>
-                <th>Course</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var student in Model)
-            {
-                <tr>
-                    <td>@student.StudentID</td>
-                    <td>@student.StudentName</td>
-                    <td>@student.DateOfBirth</td>
-                    <td>@student.StudentEmail</td>
-                    <td>@student.PhoneNumber1</td>
-                    <td>@student.SchoolName</td>
-                    <td>@student.Course</td>
-                    <td>
-                        <a asp-action="AdminEdit" asp-route-id="@student.StudentID" class="btn btn-primary btn-sm">Edit</a>
-                        <form asp-action="AdminDelete" method="post" class="d-inline">
-                            <input type="hidden" name="id" value="@student.StudentID" />
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this student?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="admin-content">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-users"></i> Students Management
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Full Name</th>
+                                <th>Student Address</th>
+                                <th>Email</th>
+                                <th>School</th>
+                                <th>Course</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var student in Model)
+                            {
+                                <tr>
+                                    <td>@student.StudentID</td>
+                                    <td>@student.StudentName</td>
+                                    <td>@student.StudentAddress</td>
+                                    <td>@student.StudentEmail</td>
+                                    <td>@student.SchoolName</td>
+                                    <td>@student.Course</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="AdminEdit" asp-route-id="@student.StudentID"
+                                               class="btn btn-outline-primary" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form asp-action="AdminDelete" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="@student.StudentID" />
+                                                <button type="submit" class="btn btn-outline-danger"
+                                                        title="Delete" onclick="return confirm('Are you sure you want to delete this student?')">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                Showing @Model.Count() students
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+}
+
+@section Scripts {
+    <script>
+        // Auto-dismiss alerts after 5 seconds
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    </script>
+}

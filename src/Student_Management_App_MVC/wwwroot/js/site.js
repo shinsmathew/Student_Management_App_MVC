@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
         passwordField.appendChild(toggle);
     }
 
+    document.querySelectorAll('form[action*="/Account/Logout"]').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            if (!confirm('Are you sure you want to logout?')) {
+                e.preventDefault();
+            }
+        });
+    });
+
     // For register page - password strength indicator
     const passwordInputs = document.querySelectorAll('input[type="password"]');
     passwordInputs.forEach(input => {
@@ -45,4 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (/[^A-Za-z0-9]/.test(password)) strength++;
         return strength;
     }
+
+   
 });

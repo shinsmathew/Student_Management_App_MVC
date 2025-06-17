@@ -43,6 +43,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/Account/Login";
         options.AccessDeniedPath = "/Account/AccessDenied";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
+        options.Cookie = new CookieBuilder
+        {
+            HttpOnly = true,
+            Name = "StudentManagement.Auth",
+            SameSite = SameSiteMode.Strict,
+            SecurePolicy = CookieSecurePolicy.Always
+        };
+        options.LogoutPath = "/Account/Login"; // Redirect to login after logout
     });
 
 // Register services

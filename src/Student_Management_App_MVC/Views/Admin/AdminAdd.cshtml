@@ -29,6 +29,13 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label asp-for="ZipCode" class="control-label"></label>
+                                <input asp-for="ZipCode" class="form-control" />
+                                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label asp-for="City" class="control-label"></label>
                                 <input asp-for="City" class="form-control" />
                                 <span asp-validation-for="City" class="text-danger"></span>
@@ -36,11 +43,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label asp-for="ZipCode" class="control-label"></label>
-                                <input asp-for="ZipCode" class="form-control" />
-                                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                                <label asp-for="State" class="control-label"></label>
+                                <input asp-for="State" class="form-control" />
+                                <span asp-validation-for="State" class="text-danger"></span>
                             </div>
                         </div>
+                       
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label asp-for="Country" class="control-label"></label>
@@ -66,9 +74,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="PhoneNumber2" class="control-label"></label>
+                                <label asp-for="PhoneNumber2" class="control-label">Secondary Phone (Optional)</label>
                                 <input asp-for="PhoneNumber2" class="form-control" />
-                                <span asp-validation-for="PhoneNumber2" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -99,7 +106,7 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <input type="submit" value="Add Student" class="btn btn-primary w-100" />
+                        <input type="submit" value="Add Student" asp-action="AdminAdd" class="btn btn-primary w-100" />
                     </div>
                 </form>
             </div>

@@ -42,11 +42,6 @@ namespace Student_Management_App_MVC.Validators
                 .NotEmpty().WithMessage("Phone number is required")
                 .Matches(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$").WithMessage("Invalid phone number format");
 
-            RuleFor(x => x.PhoneNumber2)
-                .Matches(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$").WithMessage("Invalid phone number format")
-                .When(x => !string.IsNullOrEmpty(x.PhoneNumber2));
-
-
             RuleFor(x => x.DateOfBirth)
                 .NotEmpty().WithMessage("Date of birth is required")
                 .LessThan(DateTime.Today).WithMessage("Date of birth must be in the past")

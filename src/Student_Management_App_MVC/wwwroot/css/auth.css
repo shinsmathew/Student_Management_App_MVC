@@ -7,8 +7,6 @@
     --error-color: #ef233c;
     --success-color: #4cc9f0;
 }
-
-/* Base Layout Styles */
 body.auth-layout {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
@@ -23,15 +21,24 @@ body.auth-layout {
     position: relative;
 }
 
-.auth-layout::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.85);
-    z-index: 0;
+    body.auth-layout::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.85);
+        z-index: 0;
+    }
+
+.auth-layout .auth-footer {
+    text-align: center;
+    padding: 1rem 0;
+    color: #6c757d;
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
 }
 
 /* Container & Footer */

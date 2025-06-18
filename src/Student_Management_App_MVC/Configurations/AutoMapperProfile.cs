@@ -10,11 +10,13 @@ namespace Student_Management_App_MVC.Configurations
         public AutoMapperProfile()
         {
             CreateMap<UserRegisterDto, User>();
-            CreateMap<UserLoginDto, User>();
 
             CreateMap<Student, StudentReadDto>();
+
             CreateMap<StudentCreateDto, Student>();
+           
             CreateMap<StudentUpdateDto, Student>();
+               
         }
     }
    

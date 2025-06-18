@@ -30,19 +30,31 @@
                         <thead class="table-light">
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
+                                <th>FullName</th>
+                                <th>FullAddress</th>
                                 <th>Email</th>
+                                <th>Phone1</th>
+                                <th>Phone2</th>
+                                <th>DOB</th>
                                 <th>School</th>
                                 <th>Class</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @{
+                                int rowNumber = 1;
+                            }
                             @foreach (var student in Model)
                             {
                                 <tr>
+                                    <td>@(rowNumber++)</td>
                                     <td>@student.StudentID</td>
                                     <td>@student.StudentName</td>
+                                    <td>@student.FullAddress</td>
                                     <td>@student.StudentEmail</td>
+                                    <td>@student.StudentPhone1</td>
+                                    <td>@student.StudentPhone2</td>
+                                    <td>@student.DateOfBirth.ToString("dd/MM/yyyy")</td>
                                     <td>@student.SchoolName</td>
                                     <td>@student.Course</td>
                                 </tr>

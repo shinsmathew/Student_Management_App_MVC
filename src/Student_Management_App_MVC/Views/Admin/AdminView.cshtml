@@ -40,23 +40,34 @@
                     <table class="table table-hover table-striped">
                         <thead class="table-light">
                             <tr>
-                                <th>Student ID</th>
-                                <th>Full Name</th>
-                                <th>Student Address</th>
+                                <th>#</th>
+                                <th>StudentID</th>
+                                <th>FullName</th>
+                                <th>FullAddress</th>
                                 <th>Email</th>
+                                <th>Phone1</th>
+                                <th>Phone2</th>
+                                <th>DOB</th>
                                 <th>School</th>
                                 <th>Course</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @{
+                                int rowNumber = 1;
+                            }
                             @foreach (var student in Model)
                             {
                                 <tr>
+                                    <td>@(rowNumber++)</td>
                                     <td>@student.StudentID</td>
                                     <td>@student.StudentName</td>
-                                    <td>@student.StudentAddress</td>
+                                    <td>@student.FullAddress</td>
                                     <td>@student.StudentEmail</td>
+                                    <td>@student.StudentPhone1</td>
+                                    <td>@student.StudentPhone2</td>
+                                    <td>@student.DateOfBirth.ToString("dd/MM/yyyy")</td>
                                     <td>@student.SchoolName</td>
                                     <td>@student.Course</td>
                                     <td>
@@ -65,10 +76,9 @@
                                                class="btn btn-outline-primary" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form asp-action="AdminDelete" method="post" class="d-inline">
+                                            <form asp-action="AdminDelete" method="post" class="d-inline" onsubmit="return confirmDelete();">
                                                 <input type="hidden" name="id" value="@student.StudentID" />
-                                                <button type="submit" class="btn btn-outline-danger"
-                                                        title="Delete" onclick="return confirm('Are you sure you want to delete this student?')">
+                                                <button type="submit" class="btn btn-outline-danger" title="Delete">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>
@@ -98,5 +108,11 @@
         setTimeout(function () {
             $('.alert').fadeOut('slow');
         }, 5000);
+    </script>
+
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this student?');
+        }
     </script>
 }

@@ -58,7 +58,7 @@ namespace Student_Management_App_MVC.Controllers
 
             var studentDto = new StudentUpdateDto
             {
-                
+                StudentID = student.StudentID, 
                 StudentName = student.StudentName,
                 StudentAddress = student.StudentAddress,
                 City = student.City,
@@ -66,8 +66,8 @@ namespace Student_Management_App_MVC.Controllers
                 State = student.State,
                 Country = student.Country,
                 StudentEmail = student.StudentEmail,
-                PhoneNumber1 = student.PhoneNumber1,
-                PhoneNumber2 = student.PhoneNumber2,
+                StudentPhone1 = student.StudentPhone1,
+                StudentPhone2 = student.StudentPhone2,
                 DateOfBirth = student.DateOfBirth,
                 SchoolName = student.SchoolName,
                 Course = student.Course
@@ -77,7 +77,8 @@ namespace Student_Management_App_MVC.Controllers
         }
 
         [HttpPost]
-        
+
+        [HttpPost]
         public async Task<IActionResult> AdminEdit(StudentUpdateDto studentDto)
         {
             var validator = new StudentUpdateValidator();
@@ -92,8 +93,18 @@ namespace Student_Management_App_MVC.Controllers
                 return View(studentDto);
             }
 
-            await _studentService.UpdateStudentAsync(studentDto);
-            return RedirectToAction("AdminView");
+            try
+            {
+                await _studentService.UpdateStudentAsync(studentDto);
+                TempData["SuccessMessage"] = "Student updated successfully!";
+                return RedirectToAction("AdminView");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating student");
+                ModelState.AddModelError("", "Error updating student. Please try again.");
+                return View(studentDto);
+            }
         }
 
         [HttpPost]

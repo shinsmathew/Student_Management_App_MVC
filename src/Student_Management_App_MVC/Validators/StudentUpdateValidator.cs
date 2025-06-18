@@ -38,7 +38,7 @@ namespace Student_Management_App_MVC.Validators
                 .MaximumLength(100).WithMessage("Email must not exceed 100 characters.");
 
 
-            RuleFor(x => x.PhoneNumber1)
+            RuleFor(x => x.StudentPhone1)
                 .NotEmpty().WithMessage("Phone number is required")
                 .Matches(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$").WithMessage("Invalid phone number format");
 
